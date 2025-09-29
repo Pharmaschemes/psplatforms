@@ -98,48 +98,13 @@
         .navbar-brand { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--white); text-decoration: none; }
         .navbar-brand span { color: var(--brand-primary); }
         
-        /* == MODIFIED & NEW MENU STYLES == */
         .navbar-menu { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
         .navbar-menu a { color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.2s ease-out; position: relative; padding: 0.5rem 0; }
         .navbar-menu a:hover, .navbar-menu > li.active > a { color: var(--brand-primary); }
         .navbar-menu > li > a::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0; height: 2px; background: var(--brand-primary); transition: var(--transition-base); }
         .navbar-menu > li > a:hover::after, .navbar-menu > li.active > a::after { width: 100%; }
         
-        .dropdown { position: relative; }
-        .dropdown-toggle { cursor: pointer; }
-        .dropdown-toggle .fa-chevron-down { font-size: 0.7em; margin-left: 0.5rem; transition: transform 0.3s ease; }
-        .dropdown.open > .dropdown-toggle { color: var(--brand-primary); }
-        .dropdown.open > .dropdown-toggle .fa-chevron-down { transform: rotate(180deg); }
-        
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%) translateY(10px);
-            min-width: 260px;
-            background: var(--bg-secondary);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius-md);
-            padding: 0.5rem 0;
-            list-style: none;
-            margin-top: 1rem;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        .dropdown.open .dropdown-menu {
-            display: block;
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(0);
-        }
-        .dropdown-menu a { display: block; padding: 0.75rem 1.5rem; white-space: nowrap; width: 100%; }
-        .dropdown-menu a:hover { background-color: rgba(255, 255, 255, 0.05); }
-
         .navbar-toggler { display: none; }
-        /* == END OF MODIFIED & NEW STYLES == */
 
         .hero-section {
             min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; background: linear-gradient(135deg, rgba(12, 22, 38, 0.95) 0%, rgba(10, 15, 26, 0.9) 100%), url('https://i.ibb.co/pjtT8kSH/phs-cover.png'); background-size: cover; background-position: center; background-attachment: fixed;
@@ -174,14 +139,67 @@
         .platform-links { display: flex; flex-direction: column; gap: 0.75rem; }
         .platform-link { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.05); color: var(--text-primary); text-decoration: none; padding: 0.875rem 1.5rem; border-radius: var(--radius-md); font-weight: 500; transition: all 0.2s ease-out; border: 1px solid rgba(255, 255, 255, 0.1); }
         .platform-link:hover { background: var(--platform-color, var(--brand-primary)); color: var(--white); transform: translateY(-2px); }
-        .platform-card.facebook { --platform-color: #1877F2; } .platform-card.linkedin { --platform-color: #0A66C2; } .platform-card.whatsapp { --platform-color: #25D366; } .platform-card.telegram { --platform-color: #2AABEE; } .platform-card.instagram { --platform-color: #E4405F; } .platform-card.twitter { --platform-color: #1DA1F2; } .platform-card.tiktok { --platform-color: #00f2ea; }
-        .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; }
-        .event-card { text-decoration: none; color: inherit; display: block; }
+        .platform-card.facebook { --platform-color: #1877F2; } .platform-card.linkedin { --platform-color: #0A66C2; } .platform-card.whatsapp { --platform-color: #25D366; } .platform-card.telegram { --platform-color: #2AABEE; } .platform-card.instagram { --platform-color: #E4405F; } .platform-card.twitter { --platform-color: #1DA1F2; } .platform-card.tiktok { --platform-color: #00f2ea; } .platform-card.youtube { --platform-color: #FF0000; }
+        
+        /* == EVENT SLIDER STYLES == */
+        .slider-wrapper {
+            position: relative;
+        }
+        .events-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+            padding: 1rem 0; /* Add padding to prevent glow from being cut off */
+        }
+        .events-slider::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+        }
+        .event-card {
+            flex: 0 0 350px; /* Do not grow, do not shrink, base width */
+            scroll-snap-align: start;
+            margin-right: 2rem;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .event-card:last-child {
+            margin-right: 0;
+        }
         .event-image-container { width: 100%; height: 250px; overflow: hidden; border-radius: var(--radius-xl) var(--radius-xl) 0 0; }
         .event-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); }
         .event-card:hover .event-image { transform: scale(1.1); }
         .event-content { padding: 1.5rem; text-align: center; }
         .event-title { font-family: 'Poppins', sans-serif; font-size: 1.25rem; font-weight: 600; color: var(--white); line-height: 1.4; }
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background-color: rgba(15, 23, 42, 0.7);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: var(--transition-base);
+            backdrop-filter: blur(5px);
+        }
+        .slider-btn:hover {
+            background-color: var(--brand-primary);
+            border-color: var(--brand-primary);
+        }
+        .slider-btn.prev { left: -25px; }
+        .slider-btn.next { right: -25px; }
+        /* == END OF SLIDER STYLES == */
+
         .footer { background: var(--bg-secondary); border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 4rem 0 2rem; text-align: center; }
         .footer-brand { font-family: 'Poppins', sans-serif; font-size: 2rem; font-weight: 700; color: var(--white); margin-bottom: 1rem; }
         .footer-brand span { color: var(--brand-primary); }
@@ -198,6 +216,11 @@
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         /* == RESPONSIVENESS & MOBILE MENU == */
+        @media (max-width: 1400px) { /* Adjust slider button position to be inside container */
+            .slider-btn.prev { left: 10px; }
+            .slider-btn.next { right: 10px; }
+        }
+
         @media (max-width: 768px) {
             body { cursor: auto; }
             .cursor-dot, .cursor-follower { display: none; }
@@ -250,30 +273,31 @@
                 gap: 2.5rem;
             }
             .navbar-menu a { font-size: 1.5rem; }
-
-            .dropdown.open .dropdown-menu {
-                display: block;
-                position: static;
-                background: transparent;
-                border: none;
-                box-shadow: none;
-                text-align: center;
-                margin-top: 1rem;
-                padding: 0;
-                transform: none;
-            }
-            .dropdown-menu a {
-                padding: 0.75rem 1rem;
-                font-size: 1.2rem;
-                color: var(--text-muted);
-            }
-
+            
             .hero-title-desktop { display: none; }
             .hero-title-mobile {
                 display: block; font-family: 'Poppins', sans-serif; font-size: clamp(1.8rem, 8vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; color: var(--brand-primary); animation: pulse-glow 3s infinite ease-in-out; text-align: center;
             }
             .scroll-indicator { bottom: 5rem; }
-            .platforms-grid, .events-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .platforms-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+
+            /* Slider mobile adjustments */
+            .event-card {
+                flex-basis: 90%; /* Show almost one full card */
+                margin-right: 1rem;
+            }
+            .slider-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            .slider-btn.prev { left: 5px; }
+            .slider-btn.next { right: 5px; }
+        }
+        @media (max-width: 480px) {
+            .event-card {
+                flex-basis: 100%; /* Show one full card on small screens */
+            }
         }
     </style>
 </head>
@@ -290,13 +314,8 @@
                 <ul class="navbar-menu">
                     <li><a href="#platforms">Platforms</a></li>
                     <li><a href="#events">Events</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle">Certificates <i class="fas fa-chevron-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="https://pharmaschemes.github.io/STAD-TALKS-Certificates/com" target="_blank" rel="noopener noreferrer">STAD & TALKS Certificates</a>
-                            </li>
-                        </ul>
+                    <li>
+                        <a href="https://pharmaschemes.github.io/STAD-TALKS-Certificates/com" target="_blank" rel="noopener noreferrer">Certificates</a>
                     </li>
                     <li><a href="#footer">Contact</a></li>
                 </ul>
@@ -310,22 +329,45 @@
         </div>
     </nav>
 
-    <!-- The rest of your body content remains exactly the same -->
     <section class="hero-section" id="hero"> <div class="container"> <div class="hero-content"> <div class="hero-title-desktop"> <span class="hero-title-static">PharmaSchemes</span> <div class="hero-dynamic-text"> <span>Innovate.</span> <span>Connect.</span> <span>Succeed.</span> </div> </div> <h1 class="hero-title-mobile">PharmaSchemes</h1> <p class="hero-subtitle">The largest entity for pharmacy students and graduates in Egypt.</p> <a href="#platforms" class="hero-cta"> <span>Explore Our Community</span><i class="fas fa-arrow-right"></i> </a> </div> </div> <div class="scroll-indicator" onclick="document.getElementById('platforms').scrollIntoView({behavior: 'smooth'})"> <i class="fas fa-chevron-down"></i> </div> </section>
-    <section class="section" id="platforms"> <div class="container"> <div class="section-header fade-in"> <h2 class="section-title">Our Platforms</h2> <p class="section-subtitle">Engage with our vibrant community. Connect, learn, and grow with us on your favorite social media platform.</p> </div> <div class="platforms-grid"> <div class="platform-card facebook fade-in"> <i class="fab fa-facebook-f platform-icon"></i><h3 class="platform-title">Facebook</h3> <div class="platform-links"> <a href="https://www.facebook.com/profile.php?id=100089921475011" target="_blank" rel="noopener noreferrer" class="platform-link"><span>Official Page</span></a> <a href="https://facebook.com/groups/281076176606953/" target="_blank" rel="noopener noreferrer" class="platform-link"><span>Community Group</span></a> </div> </div> <div class="platform-card linkedin fade-in"> <i class="fab fa-linkedin-in platform-icon"></i><h3 class="platform-title">LinkedIn</h3> <div class="platform-links"> <a href="https://www.linkedin.com/company/pharmaschemes%D9%81%D8%A7%D8%B1%D9%85%D8%A7%D8%B3%D9%83%D9%8A%D9%85%D8%B2%D9%80/" target="_blank" rel="noopener noreferrer" class="platform-link"><span>Company Page</span></a> <a href="https://www.linkedin.com/groups/9073732" target="_blank" rel="noopener noreferrer" class="platform-link"><span>Professional Group</span></a> </div> </div> <div class="platform-card telegram fade-in"> <i class="fab fa-telegram-plane platform-icon"></i><h3 class="platform-title">Telegram</h3> <div class="platform-links"> <a href="https://t.me/PhSchemes" target="_blank" rel="noopener noreferrer" class="platform-link"><span>Main Channel</span></a> <a href="https://t.me/pharmschemes" target="_blank" rel="noopener noreferrer" class="platform-link"><span>Clinical Training</span></a> <a href="https://t.me/pharmaschemes" target="_blank" rel="noopener noreferrer" class="platform-link"><span>Community Group</span></a> </div> </div> <div class="platform-card whatsapp fade-in"> <i class="fab fa-whatsapp platform-icon"></i><h3 class="platform-title">WhatsApp</h3> <div class="platform-links"> <a href="https://whatsapp.com/channel/0029Va5R8lfH5JM7J5k8Cr1U" target="_blank" rel="noopener noreferrer" class="platform-link"><span>Broadcast Channel</span></a> </div> </div> <div class="platform-card instagram fade-in"> <i class="fab fa-instagram platform-icon"></i><h3 class="platform-title">Instagram</h3> <div class="platform-links"> <a href="https://www.instagram.com/pharma.schemes?igsh=MTlmYXFtNjNnMzcwOA==" target="_blank" rel="noopener noreferrer" class="platform-link"><span>Follow Our Story</span></a> </div> </div> <div class="platform-card tiktok fade-in"> <i class="fab fa-tiktok platform-icon"></i><h3 class="platform-title">TikTok</h3> <div class="platform-links"> <a href="https://www.tiktok.com/@pharmaschemes_?_t=ZS-8yPNX0Ty1UG&_r=1" target="_blank" rel="noopener noreferrer" class="platform-link"><span>Follow Us</span></a> </div> </div> <div class="platform-card twitter fade-in"> <i class="fab fa-twitter platform-icon"></i><h3 class="platform-title">X (Twitter)</h3> <div class="platform-links"> <a href="https://x.com/Pharma_schemes?t=tYH7625pn5Ny46Sk7EVlww&s=09" target="_blank" rel="noopener noreferrer" class="platform-link"><span>Follow for Updates</span></a> </div> </div> </div> </div> </section>
-    <section class="section" id="events"> <div class="container"> <div class="section-header fade-in"> <h2 class="section-title">Flagship Events</h2> <p class="section-subtitle">Explore our signature events that have propelled thousands into their pharmaceutical careers.</p> </div> <div class="events-grid"> <a href="https://www.facebook.com/profile.php?id=100089921475011" target="_blank" rel="noopener noreferrer" class="event-card fade-in"> <div class="event-image-container"><img src="https://i.ibb.co/v6SB30M1/1.jpg" alt="Winter Wave" class="event-image" loading="lazy"></div> <div class="event-content"><h3 class="event-title">PharmaSchemes Winter Wave</h3></div> </a> <a href="https://www.facebook.com/profile.php?id=100089921475011" target="_blank" rel="noopener noreferrer" class="event-card fade-in"> <div class="event-image-container"><img src="https://i.ibb.co/v67LQhv5/2.jpg" alt="Hiring Shortcut" class="event-image" loading="lazy"></div> <div class="event-content"><h3 class="event-title">PharmaSchemes Hiring Shortcut</h3></div> </a> <a href="https://www.facebook.com/profile.php?id=100089921475011" target="_blank" rel="noopener noreferrer" class="event-card fade-in"> <div class="event-image-container"><img src="https://i.ibb.co/QFD6NpzW/3.jpg" alt="Online Job Fair" class="event-image" loading="lazy"></div> <div class="event-content"><h3 class="event-title">The First Online Job Fair</h3></div> </a> <a href="https://www.facebook.com/profile.php?id=100089921475011" target="_blank" rel="noopener noreferrer" class="event-card fade-in"> <div class="event-image-container"><img src="https://i.ibb.co/HL6BNpy0/4.jpg" alt="STAD" class="event-image" loading="lazy"></div> <div class="event-content"><h3 class="event-title">PharmaSchemes STAD</h3></div> </a> <a href="https://www.facebook.com/profile.php?id=100089921475011" target="_blank" rel="noopener noreferrer" class="event-card fade-in"> <div class="event-image-container"><img src="https://i.ibb.co/qMvphFXn/5.jpg" alt="SPOT" class="event-image" loading="lazy"></div> <div class="event-content"><h3 class="event-title">PharmaSchemes SPOT</h3></div> </a> <a href="https://www.facebook.com/profile.php?id=100089921475011" target="_blank" rel="noopener noreferrer" class="event-card fade-in"> <div class="event-image-container"><img src="https://i.ibb.co/1tyq7K6p/6.jpg" alt="NEXT" class="event-image" loading="lazy"></div> <div class="event-content"><h3 class="event-title">PharmaSchemes NEXT</h3></div> </a> <a href="https://www.facebook.com/profile.php?id=100089921475011" target="_blank" rel="noopener noreferrer" class="event-card fade-in"> <div class="event-image-container"><img src="https://i.ibb.co/W4DYbVj8/7.jpg" alt="PharmaSchemes FAST" class="event-image" loading="lazy"></div> <div class="event-content"><h3 class="event-title">PharmaSchemes FAST</h3></div> </a> </div> </div> </section>
+    
+    <section class="section" id="platforms"> <div class="container"> <div class="section-header fade-in"> <h2 class="section-title">Our Platforms</h2> <p class="section-subtitle">Engage with our vibrant community. Connect, learn, and grow with us on your favorite social media platform.</p> </div> <div class="platforms-grid"> <div class="platform-card facebook fade-in"> <i class="fab fa-facebook-f platform-icon"></i><h3 class="platform-title">Facebook</h3> <div class="platform-links"> <a href="https://www.facebook.com/profile.php?id=100089921475011" target="_blank" rel="noopener noreferrer" class="platform-link"><span>Official Page</span></a> <a href="https://facebook.com/groups/281076176606953/" target="_blank" rel="noopener noreferrer" class="platform-link"><span>Community Group</span></a> </div> </div> <div class="platform-card linkedin fade-in"> <i class="fab fa-linkedin-in platform-icon"></i><h3 class="platform-title">LinkedIn</h3> <div class="platform-links"> <a href="https://www.linkedin.com/company/pharmaschemes%D9%81%D8%A7%D8%B1%D9%85%D8%A7%D8%B3%D9%83%D9%8A%D9%85%D8%B2%D9%80/" target="_blank" rel="noopener noreferrer" class="platform-link"><span>Company Page</span></a> <a href="https://www.linkedin.com/groups/9073732" target="_blank" rel="noopener noreferrer" class="platform-link"><span>Professional Group</span></a> </div> </div> <div class="platform-card telegram fade-in"> <i class="fab fa-telegram-plane platform-icon"></i><h3 class="platform-title">Telegram</h3> <div class="platform-links"> <a href="https://t.me/PhSchemes" target="_blank" rel="noopener noreferrer" class="platform-link"><span>Main Channel</span></a> <a href="https://t.me/pharmschemes" target="_blank" rel="noopener noreferrer" class="platform-link"><span>Clinical Training</span></a> <a href="https://t.me/pharmaschemes" target="_blank" rel="noopener noreferrer" class="platform-link"><span>Community Group</span></a> </div> </div> <div class="platform-card whatsapp fade-in"> <i class="fab fa-whatsapp platform-icon"></i><h3 class="platform-title">WhatsApp</h3> <div class="platform-links"> <a href="https://whatsapp.com/channel/0029Va5R8lfH5JM7J5k8Cr1U" target="_blank" rel="noopener noreferrer" class="platform-link"><span>Broadcast Channel</span></a> </div> </div> <div class="platform-card instagram fade-in"> <i class="fab fa-instagram platform-icon"></i><h3 class="platform-title">Instagram</h3> <div class="platform-links"> <a href="https://www.instagram.com/pharma.schemes?igsh=MTlmYXFtNjNnMzcwOA==" target="_blank" rel="noopener noreferrer" class="platform-link"><span>Follow Our Story</span></a> </div> </div> <div class="platform-card tiktok fade-in"> <i class="fab fa-tiktok platform-icon"></i><h3 class="platform-title">TikTok</h3> <div class="platform-links"> <a href="https://www.tiktok.com/@pharmaschemes_?_t=ZS-8yPNX0Ty1UG&_r=1" target="_blank" rel="noopener noreferrer" class="platform-link"><span>Follow Us</span></a> </div> </div> <div class="platform-card youtube fade-in"> <i class="fab fa-youtube platform-icon"></i><h3 class="platform-title">YouTube</h3> <div class="platform-links"> <a href="https://youtube.com/@pharmaschemes2020?si=Oy3CyyWQc3NpN16N" target="_blank" rel="noopener noreferrer" class="platform-link"><span>Our Channel</span></a> </div> </div> <div class="platform-card twitter fade-in"> <i class="fab fa-twitter platform-icon"></i><h3 class="platform-title">X (Twitter)</h3> <div class="platform-links"> <a href="https://x.com/Pharma_schemes?t=tYH7625pn5Ny46Sk7EVlww&s=09" target="_blank" rel="noopener noreferrer" class="platform-link"><span>Follow for Updates</span></a> </div> </div> </div> </div> </section>
+    
+    <section class="section" id="events">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">Flagship Events</h2>
+                <p class="section-subtitle">Explore our signature events that have propelled thousands into their pharmaceutical careers.</p>
+            </div>
+            <div class="slider-wrapper fade-in">
+                <div class="events-slider">
+                    <a href="https://www.facebook.com/profile.php?id=100089921475011" target="_blank" rel="noopener noreferrer" class="event-card"> <div class="event-image-container"><img src="https://i.ibb.co/v6SB30M1/1.jpg" alt="Winter Wave" class="event-image" loading="lazy"></div> <div class="event-content"><h3 class="event-title">PharmaSchemes Winter Wave</h3></div> </a>
+                    <a href="https://www.facebook.com/profile.php?id=100089921475011" target="_blank" rel="noopener noreferrer" class="event-card"> <div class="event-image-container"><img src="https://i.ibb.co/v67LQhv5/2.jpg" alt="Hiring Shortcut" class="event-image" loading="lazy"></div> <div class="event-content"><h3 class="event-title">PharmaSchemes Hiring Shortcut</h3></div> </a>
+                    <a href="https://www.facebook.com/profile.php?id=100089921475011" target="_blank" rel="noopener noreferrer" class="event-card"> <div class="event-image-container"><img src="https://i.ibb.co/QFD6NpzW/3.jpg" alt="Online Job Fair" class="event-image" loading="lazy"></div> <div class="event-content"><h3 class="event-title">The First Online Job Fair</h3></div> </a>
+                    <a href="https://www.facebook.com/profile.php?id=100089921475011" target="_blank" rel="noopener noreferrer" class="event-card"> <div class="event-image-container"><img src="https://i.ibb.co/HL6BNpy0/4.jpg" alt="STAD" class="event-image" loading="lazy"></div> <div class="event-content"><h3 class="event-title">PharmaSchemes STAD</h3></div> </a>
+                    <a href="https://www.facebook.com/profile.php?id=100089921475011" target="_blank" rel="noopener noreferrer" class="event-card"> <div class="event-image-container"><img src="https://i.ibb.co/qMvphFXn/5.jpg" alt="SPOT" class="event-image" loading="lazy"></div> <div class="event-content"><h3 class="event-title">PharmaSchemes SPOT</h3></div> </a>
+                    <a href="https://www.facebook.com/profile.php?id=100089921475011" target="_blank" rel="noopener noreferrer" class="event-card"> <div class="event-image-container"><img src="https://i.ibb.co/1tyq7K6p/6.jpg" alt="NEXT" class="event-image" loading="lazy"></div> <div class="event-content"><h3 class="event-title">PharmaSchemes NEXT</h3></div> </a>
+                    <a href="https://www.facebook.com/profile.php?id=100089921475011" target="_blank" rel="noopener noreferrer" class="event-card"> <div class="event-image-container"><img src="https://i.ibb.co/W4DYbVj8/7.jpg" alt="PharmaSchemes FAST" class="event-image" loading="lazy"></div> <div class="event-content"><h3 class="event-title">PharmaSchemes FAST</h3></div> </a>
+                    <a href="https://www.facebook.com/profile.php?id=100089921475011" target="_blank" rel="noopener noreferrer" class="event-card"> <div class="event-image-container"><img src="https://i.ibb.co/wrb0317j/518616856-703668542640522-3763182086382910901-n.jpg" alt="PharmaSchemes STAD 2025" class="event-image" loading="lazy"></div> <div class="event-content"><h3 class="event-title">PharmaSchemes STAD 2025</h3></div> </a>
+                    <a href="https://www.facebook.com/profile.php?id=100089921475011" target="_blank" rel="noopener noreferrer" class="event-card"> <div class="event-image-container"><img src="https://i.ibb.co/GQ7g3QVp/542760751-742787748728601-8689882662040726490-n.jpg" alt="STAD 2025 Wave 2" class="event-image" loading="lazy"></div> <div class="event-content"><h3 class="event-title">STAD 2025 Wave 2</h3></div> </a>
+                </div>
+                <button class="slider-btn prev" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn next" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer" id="footer"> <div class="container"> <h3 class="footer-brand">Pharma<span>Schemes</span></h3> <p class="footer-description">Connecting the pharmaceutical community in Egypt and beyond. Your gateway to professional excellence.</p> <div class="footer-social"> <a href="https://www.facebook.com/profile.php?id=100089921475011" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a> <a href="https://www.linkedin.com/company/pharmaschemes%D9%81%D8%A7%D8%B1%D9%85%D8%A7%D8%B3%D9%83%D9%8A%D9%85%D8%B2%D9%80/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a> <a href="https://t.me/PhSchemes" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a> </div> <p class="footer-copyright">© 2024 PharmaSchemes. Crafted with passion.</p> </div> </footer>
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // MODIFIED: All functions are now initialized, including the new ones.
         initLoadingOverlay();
         initNavbarBehavior();
         initScrollAnimations();
         initSmoothScrolling();
         initActiveNavHighlighting();
-        initClickableDropdown(); // New function for dropdown logic
-        initMobileMenu();       // New function for mobile menu
+        initMobileMenu();
+        initEventsSlider(); // Initialize the new slider
         
         if (window.matchMedia("(min-width: 769px)").matches) {
             initCustomCursor();
@@ -333,7 +375,6 @@
         }
     });
 
-    // == NEW FUNCTION FOR MOBILE MENU ==
     function initMobileMenu() {
         const toggler = document.querySelector('.navbar-toggler');
         const menu = document.querySelector('.navbar-collapse');
@@ -343,31 +384,6 @@
             e.stopPropagation();
             toggler.classList.toggle('active');
             menu.classList.toggle('active');
-        });
-    }
-
-    // == NEW FUNCTION FOR CLICKABLE DROPDOWN ==
-    function initClickableDropdown() {
-        const dropdown = document.querySelector('.dropdown');
-        if (!dropdown) return;
-
-        const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
-
-        dropdownToggle.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            // Close other dropdowns if you have more than one in the future
-            // document.querySelectorAll('.dropdown.open').forEach(other => {
-            //     if (other !== dropdown) other.classList.remove('open');
-            // });
-            dropdown.classList.toggle('open');
-        });
-
-        // Close dropdown if clicking anywhere else on the page
-        document.addEventListener('click', (e) => {
-            if (dropdown.classList.contains('open') && !dropdown.contains(e.target)) {
-                dropdown.classList.remove('open');
-            }
         });
     }
 
@@ -405,16 +421,9 @@
     function initSmoothScrolling() {
          document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                const isDropdownToggle = this.classList.contains('dropdown-toggle');
-                if (isDropdownToggle) {
-                    e.preventDefault();
-                    return; // Prevent scrolling for dropdown toggle
-                }
-
                 const targetElement = document.querySelector(this.getAttribute('href'));
                 if(targetElement) {
                      e.preventDefault();
-                     // If mobile menu is open, close it after clicking a link
                      const mobileMenu = document.querySelector('.navbar-collapse');
                      if(mobileMenu && mobileMenu.classList.contains('active')) {
                          document.querySelector('.navbar-toggler').classList.remove('active');
@@ -428,7 +437,7 @@
 
     function initActiveNavHighlighting() {
         const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.navbar-menu > li:not(.dropdown) > a');
+        const navLinks = document.querySelectorAll('.navbar-menu > li > a');
         if (!sections.length || !navLinks.length) return;
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -467,6 +476,31 @@
                 card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
             });
             card.addEventListener('mouseleave', () => { card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)'; });
+        });
+    }
+
+    // == NEW SLIDER FUNCTIONALITY ==
+    function initEventsSlider() {
+        const sliderWrapper = document.querySelector('.slider-wrapper');
+        if (!sliderWrapper) return;
+
+        const slider = sliderWrapper.querySelector('.events-slider');
+        const prevBtn = sliderWrapper.querySelector('.slider-btn.prev');
+        const nextBtn = sliderWrapper.querySelector('.slider-btn.next');
+        if (!slider || !prevBtn || !nextBtn) return;
+
+        nextBtn.addEventListener('click', () => {
+            const firstCard = slider.querySelector('.event-card');
+            if (!firstCard) return;
+            const scrollAmount = firstCard.offsetWidth + parseFloat(getComputedStyle(firstCard).marginRight);
+            slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+
+        prevBtn.addEventListener('click', () => {
+            const firstCard = slider.querySelector('.event-card');
+            if (!firstCard) return;
+            const scrollAmount = firstCard.offsetWidth + parseFloat(getComputedStyle(firstCard).marginRight);
+            slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
         });
     }
     </script>
